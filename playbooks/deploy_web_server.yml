@@ -1,0 +1,33 @@
+---
+- name: Deploy web server with NGINX
+  hosts: all
+  become: yes
+  tasks:
+    - name: Update package cache
+      apt:
+        update_cache: yes
+      when: ansible_os_family == "Debian"
+    
+    - name: Install NGINX
+      package:
+        name: nginx
+        state: present
+    
+    - name: Start and enable NGINX
+      service:
+        name: nginx
+        state: started
+        enabled: yes
+    
+    - name: Create custom index page
+      copy:
+        content: |
+          <html>
+          <head><title>Deployed by AI Agent</title></head>
+          <body>
+            <h1>Server deployed successfully!</h1>
+            <p>This server was configured by the OpenStack AI Agent.</p>
+          </body>
+          </html>
+        dest: /var/www/html/index.html
+        mode: '0644'

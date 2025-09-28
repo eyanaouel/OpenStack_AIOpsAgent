@@ -1,0 +1,26 @@
+---
+- name: Install Docker
+  hosts: all
+  become: yes
+  tasks:
+    - name: Update package cache
+      package:
+        name: "*"
+        state: latest
+    
+    - name: Install Docker
+      package:
+        name: docker.io
+        state: present
+    
+    - name: Start Docker service
+      service:
+        name: docker
+        state: started
+        enabled: yes
+    
+    - name: Add user to docker group
+      user:
+        name: "{{ ansible_user }}"
+        groups: docker
+        append: yes

@@ -1,0 +1,28 @@
+---
+- name: Install and configure Nginx
+  hosts: all
+  become: yes
+  tasks:
+    - name: Install nginx
+      package:
+        name: nginx
+        state: present
+    
+    - name: Start nginx service
+      service:
+        name: nginx
+        state: started
+        enabled: yes
+    
+    - name: Create simple index page
+      copy:
+        content: |
+          <html>
+          <head><title>Deployed by OpenStack Agent</title></head>
+          <body>
+            <h1>Server deployed successfully!</h1>
+            <p>This server was configured automatically by the OpenStack AI Agent.</p>
+          </body>
+          </html>
+        dest: /var/www/html/index.html
+        mode: '0644'

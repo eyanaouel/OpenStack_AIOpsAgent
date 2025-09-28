@@ -1,0 +1,23 @@
+# Ignorer les fichiers de configuration sensibles
+.env
+
+# Ignorer l'environnement virtuel
+venv/
+
+# Ignorer les fichiers compilés Python
+*.pyc
+
+# Ignorer les logs
+*.log
+
+# Ignorer les données spécifiques au projet
+chromadb/
+learning.db
+
+# Ignorer les fichiers temporaires
+*.tmp
+*.swp
+
+# Ignorer les dossiers de build (si applicables)
+build/
+dist/

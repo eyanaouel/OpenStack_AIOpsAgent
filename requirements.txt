@@ -1,0 +1,15 @@
+openstacksdk>=1.5.0
+python-openstackclient>=6.0.0
+rich>=13.0.0
+python-dotenv>=1.0.0
+python-dateutil>=2.8.0
+prometheus-client>=0.14.1
+elasticsearch>=8.0.0
+spacy>=3.0.0
+scikit-learn>=1.0.0
+langchain>=0.3.27
+llama-index>=0.13.5
+jupyter
+numpy
+ansible-runner>=2.4.1
+kubernetes>=33.1.0

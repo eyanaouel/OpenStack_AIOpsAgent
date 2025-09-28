@@ -1,0 +1,70 @@
+---
+- name: Setup Kubernetes cluster
+  hosts: all
+  become: yes
+  vars:
+    k8s_version: "1.28"
+    pod_network_cidr: "10.244.0.0/16"
+    
+  tasks:
+    - name: Install dependencies
+      package:
+        name:
+          - apt-transport-https
+          - ca-certificates
+          - curl
+          - gpg
+        state: present
+      when: ansible_os_family == "Debian"
+    
+    - name: Add Kubernetes apt key
+      apt_key:
+        url: https://packages.cloud.google.com/apt/doc/apt-key.gpg
+        state: present
+      when: ansible_os_family == "Debian"
+    
+    - name: Add Kubernetes repository
+      apt_repository:
+        repo: "deb https://apt.kubernetes.io/ kubernetes-xenial main"
+        state: present
+      when: ansible_os_family == "Debian"
+    
+    - name: Install Kubernetes components
+      package:
+        name:
+          - kubelet
+          - kubeadm
+          - kubectl
+        state: present
+      
+    - name: Hold Kubernetes packages
+      dpkg_selections:
+        name: "{{ item }}"
+        selection: hold
+      loop:
+        - kubelet
+        - kubeadm
+        - kubectl
+      when: ansible_os_family == "Debian"
+    
+    - name: Initialize Kubernetes master
+      command: kubeadm init --pod-network-cidr={{ pod_network_cidr }}
+      when: inventory_hostname in groups['k8s_masters']
+      register: kubeadm_init
+      
+    - name: Create .kube directory
+      file:
+        path: /home/{{ ansible_user }}/.kube
+        state: directory
+        owner: "{{ ansible_user }}"
+        group: "{{ ansible_user }}"
+      when: inventory_hostname in groups['k8s_masters']
+      
+    - name: Copy admin.conf to user's kube config
+      copy:
+        src: /etc/kubernetes/admin.conf
+        dest: /home/{{ ansible_user }}/.kube/config
+        remote_src: yes
+        owner: "{{ ansible_user }}"
+        group: "{{ ansible_user }}"
+      when: inventory_hostname in groups['k8s_masters']
