@@ -2,10 +2,6 @@
 
 > **Intelligent Cloud Operations Agent** - An autonomous AI system for OpenStack infrastructure management using natural language processing and advanced automation.
 
-[![Python](https://img.shields.io/badge/Python-3.9+-blue.svg)](https://python.org)
-[![OpenStack](https://img.shields.io/badge/OpenStack-Compatible-orange.svg)](https://openstack.org)
-[![AI](https://img.shields.io/badge/AI-Google%20Gemini-green.svg)](https://ai.google.dev)
-[![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 ##  Overview
 
@@ -227,19 +223,13 @@ python -m pytest tests/
 
 ## Future Roadmap
 
-- [ ] Web UI dashboard
-- [ ] Advanced security scanning
-- [ ] Cost optimization recommendations
-- [ ] Integration with monitoring tools (Prometheus, Grafana)
-- [ ] Workflow scheduling and orchestration
-- [ ] API REST for external integrations
+-  Web UI dashboard
+-  Advanced security scanning
+-  Cost optimization recommendations
+-  Integration with monitoring tools (Prometheus, Grafana)
+-  Workflow scheduling and orchestration
+-  API REST for external integrations
 
-##  Documentation
-
-- [API Documentation](docs/api.md)
-- [Architecture Guide](docs/architecture.md)
-- [Deployment Guide](docs/deployment.md)
-- [Troubleshooting](docs/troubleshooting.md)
 
 ##  Acknowledgments
 
