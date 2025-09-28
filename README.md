@@ -1,201 +1,251 @@
-# **AI Agent for OpenStack – Intelligent Infrastructure and Operations Management**
+# OpenstackAIOpsAgent 
 
-## **Executive Summary**
+> **Intelligent Cloud Operations Agent** - An autonomous AI system for OpenStack infrastructure management using natural language processing and advanced automation.
 
-The **AI Agent for OpenStack** is an autonomous software entity designed to provide both **proactive and reactive** management of OpenStack cloud environments.
-Its primary objectives are:
+[![Python](https://img.shields.io/badge/Python-3.9+-blue.svg)](https://python.org)
+[![OpenStack](https://img.shields.io/badge/OpenStack-Compatible-orange.svg)](https://openstack.org)
+[![AI](https://img.shields.io/badge/AI-Google%20Gemini-green.svg)](https://ai.google.dev)
+[![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-1. **Infrastructure Management** – full control over VM lifecycles (listing, launching with specific configurations, state changes, deletion).
-2. **Operational Intelligence** – automated problem detection, diagnosis, and resolution suggestions based on logs, metrics, and predictive models.
-3. **Extensibility** – modular, plugin-driven architecture to integrate with additional OpenStack services and third-party tools.
-4. **Continuous Improvement** – AI-powered learning loop from operational data to improve decision-making over time.
+##  Overview
 
-This agent is intended for use by **cloud operators, DevOps teams, and automated pipelines** to reduce operational costs, minimize downtime, and enhance system resilience.
+AIOps-Agent is an advanced autonomous AI system developed during my engineering internship at a cloud startup. This project represents the cutting edge of AIOps (Artificial Intelligence for IT Operations), combining Large Language Models (LLMs), Retrieval-Augmented Generation (RAG), and cloud automation to create an intelligent operator capable of managing OpenStack infrastructure through natural language commands.
 
----
+**Key Innovation**: Unlike traditional chatbots, this agent actually executes real infrastructure operations, bridging the gap between human intent and cloud automation.
 
-## **Functional Scope**
+##  Mission & Vision
 
-### **Phase 1 – Intelligent Infrastructure Control**
+The agent transforms natural language requests like *"Deploy a web server with NGINX and configure firewall rules"* into concrete infrastructure actions, reducing operational overhead and accelerating deployments.
 
-* **VM Inventory & Querying**
+### Core Objectives
+- **Natural Language Processing**: Interpret complex infrastructure requests in French/English
+- **Autonomous Task Decomposition**: Break down complex operations into executable steps
+- **Multi-Cloud Integration**: Support OpenStack, Kubernetes, and Ansible automation
+- **Continuous Learning**: Improve performance through execution history analysis
+- **24/7 Autonomous Monitoring**: Detect and resolve infrastructure issues automatically
 
-  * List all existing virtual machines with metadata (name, status, flavor, image, network, uptime).
-* **VM Lifecycle Operations**
+##  Architecture
 
-  * Launch new VMs with predefined or custom configurations (CPU, RAM, disk, network).
-  * Change VM operational state (start, stop, suspend, resume, reboot).
-  * Delete VMs securely with dependency checks.
-* **Bulk Operations**
-
-  * Perform batched actions on multiple VMs (e.g., start all VMs in a project).
-* **Audit Logging**
-
-  * Maintain detailed records of all operations for compliance.
-
-### **Phase 2 – Operational Diagnostics & Maintenance**
-
-* **Centralized Log Analysis**
-
-  * Collect logs from OpenStack services (Nova, Neutron, Cinder, Keystone, etc.).
-  * Extract and normalize relevant events.
-* **Automated Issue Detection**
-
-  * Classify errors and warnings using trained AI models (NLP-based).
-* **Root Cause Analysis**
-
-  * Correlate log events with metrics (CPU, memory, network) for precise fault localization.
-* **Recommendation Engine**
-
-  * Suggest actionable remediation steps (e.g., “Increase volume size for VM X”).
-* **Predictive Maintenance**
-
-  * Forecast failures or performance degradation before they occur.
-
----
-
-## **System Architecture**
-
-### **High-Level Overview**
-
-```
-                +----------------------+
-                |    User / Operator   |
-                |  (Web UI / CLI / API)|
-                +----------+-----------+
-                           |
-                           v
-                +----------------------+
-                |  Agent REST API / CLI|
-                +----------+-----------+
-                           |
-                           v
-+----------------------------------------------------------+
-|                       Agent Core                         |
-|----------------------------------------------------------|
-| Scheduler | Executor | Plugin Manager | Policy Engine    |
-+-----+-----------+-------------+------------+-------------+
-      |           |             |            |
-      v           v             v            v
-+-----+---+  +----+-----+  +----+-----+  +----+-----+
-|Infra Mgmt|  |Log Analyzer|  |Diagnostics|  |AI Engine|
-+-----+---+  +----+-----+  +----+-----+  +----+-----+
-      |           |             |            |
-      v           v             v            v
-+----------------+   +------------------------------+
-| OpenStack API  |   | Monitoring & Logging Systems |
-+----------------+   +------------------------------+
+```mermaid
+graph TD
+    A[Natural Language Input] --> B[Task Planner with LLM]
+    B --> C[Knowledge Base RAG]
+    C --> D[Execution Plan Generator]
+    D --> E[Plan Executor]
+    E --> F[OpenStack Tools]
+    E --> G[Ansible Playbooks]
+    E --> H[Kubernetes Commands]
+    E --> I[Monitoring Checks]
+    I --> J[Learning Engine]
+    J --> K[Continuous Improvement]
 ```
 
----
+### Key Components
 
-### **Core Components and Their Roles**
+- **Intelligent Task Planner**: Uses Google Gemini LLM for request decomposition
+- **Advanced RAG System**: Knowledge base with semantic search using SentenceTransformers
+- **Multi-Tool Integration**: OpenStack API, Ansible, Kubernetes, monitoring tools
+- **Learning Engine**: SQLite-based analytics for performance optimization
+- **Autonomous Mode**: Continuous infrastructure monitoring and auto-remediation
 
-#### **1. Scheduler**
+## Features
 
-* Handles **time-based** and **event-driven** task execution.
-* Supports SLA-aware prioritization (e.g., urgent remediation before routine tasks).
-* Built-in retry and backoff strategies.
+### Core Capabilities
+- **Natural Language Commands**: Process requests in human language
+- **Infrastructure Automation**: VM creation, network configuration, security groups
+- **Application Deployment**: Automated web server, Docker, Kubernetes deployments
+- **Intelligent Planning**: Dependency resolution and execution ordering
+- **Error Recovery**: Automatic fallback plans and error handling
+- **Knowledge Management**: Searchable documentation and best practices
 
-#### **2. Executor**
+### Advanced Features
+-  **Autonomous Operations**: Self-healing infrastructure monitoring
+-  **Performance Learning**: Execution history analysis and optimization
+-  **Smart Diagnostics**: Automatic issue detection and resolution
+-  **Dynamic Inventory**: OpenStack-integrated Ansible inventory
+-  **Simulation Mode**: Safe testing without affecting production
 
-* Executes infrastructure and diagnostic actions.
-* Supports multiple execution contexts:
+##  Technology Stack
 
-  * **Direct OpenStack API calls**
-  * **Local system commands**
-  * **Containerized isolated tasks**
-* Monitors execution resource usage and enforces timeouts.
+| Component | Technology | Purpose |
+|-----------|------------|---------|
+| **AI/ML** | Google Gemini LLM | Natural language understanding |
+| **Vector DB** | ChromaDB | Knowledge base and RAG |
+| **Embeddings** | SentenceTransformers | Semantic search |
+| **Cloud** | OpenStack SDK | Infrastructure management |
+| **Orchestration** | Ansible | Configuration management |
+| **Containers** | Kubernetes | Container orchestration |
+| **Database** | SQLite | Learning and analytics |
+| **UI** | Rich Console | Interactive command interface |
 
-#### **3. Plugin Manager**
+##  Installation
 
-* Dynamically loads and manages extensions for:
+### Prerequisites
+- Python 3.9+
+- OpenStack environment with API access
+- Google Gemini API key
+- Optional: Kubernetes cluster, Ansible
 
-  * VM lifecycle operations
-  * Log analysis
-  * Diagnostics and AI models
-  * Custom OpenStack service integrations
+### Quick Setup
 
-#### **4. Policy Engine**
+```bash
+# Clone the repository
+git clone https://github.com/yourusername/AIOps-Agent.git
+cd AIOps-Agent
 
-* Governs decision-making rules (manual overrides, approval workflows).
-* Implements **safe mode** for high-impact operations.
+# Create virtual environment
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
 
-#### **5. AI Engine**
+# Install dependencies
+pip install -r requirements.txt
 
-* **Log NLP Processing** – transforms raw logs into structured events.
-* **Predictive Models** – estimates probability of failures.
-* **Recommendation Generation** – prioritizes and proposes corrective actions.
+# Configure environment
+cp .env.example .env
+# Edit .env with your credentials
+```
 
----
+### Environment Configuration
 
-## **Technical Implementation Roadmap**
+```bash
+# .env file
+GOOGLE_API_KEY=your_gemini_api_key
+OS_CLOUD=your_openstack_cloud_name
+SIMULATE=1  # Set to 0 for production mode
+```
 
-### **Phase 1 – Infrastructure Management** *(Estimated: 4 weeks)*
+### OpenStack Configuration
 
-**Deliverables:**
+Create `clouds.yaml` in your project root:
 
-1. API integration with OpenStack services (Nova, Neutron, Glance).
-2. VM lifecycle methods (`list_vms`, `launch_vm`, `change_vm_state`, `delete_vm`).
-3. Web UI dashboard for operational control.
-4. Unit and integration testing.
+```yaml
+clouds:
+  openstack:
+    auth:
+      auth_url: https://your-openstack-url:5000/v3
+      username: your_username
+      password: your_password
+      project_name: your_project
+      user_domain_name: default
+      project_domain_name: default
+    region_name: RegionOne
+    interface: public
+```
 
-**Milestones:**
+##  Usage
 
-* Week 1–2: API integration & VM listing.
-* Week 3: VM lifecycle implementation.
-* Week 4: Dashboard & tests.
+### Interactive Mode
+```bash
+python openstack_agent.py
+```
 
----
+### Example Commands
+- *"Créé un serveur web avec NGINX"*
+- *"Deploy a Kubernetes cluster with monitoring"*
+- *"Check infrastructure health and fix any issues"*
+- *"Create 3 VMs with load balancer configuration"*
 
-### **Phase 2 – AI-Driven Operational Diagnostics** *(Estimated: 6 weeks)*
+### Programmatic Usage
+```python
+from agent import AutonomousAgent
+import openstack
+from langchain_google_genai import GoogleGenerativeAI
 
-**Deliverables:**
+# Initialize
+conn = openstack.connect(cloud="openstack")
+llm = GoogleGenerativeAI(model="gemini-1.5-flash")
+agent = AutonomousAgent(conn, llm)
 
-1. Central log aggregation and parsing.
-2. AI models for log classification.
-3. Root cause correlation with metrics.
-4. Action recommendation module.
+# Process request
+result = agent.process_natural_request("Deploy a web application")
+print(f"Success: {result['success']}")
+```
 
-**Milestones:**
+##  Project Structure
 
-* Week 1–2: Log ingestion pipeline.
-* Week 3–4: AI model development.
-* Week 5: Recommendation engine.
-* Week 6: Full diagnostic workflow testing.
+```
+AIOps-Agent/
+├── agent.py              # Main agent implementation
+├── knowledge/             # RAG knowledge base
+├── playbooks/            # Ansible automation
+├── inventory/            # Dynamic inventory scripts
+├── chromadb/             # Vector database
+├── requirements.txt      # Python dependencies
+├── .env.example          # Environment template
+└── docs/                 # Documentation
+```
 
----
+##  Research & Development
 
-### **Phase 3 – Deployment, Optimization & Maintenance** *(Estimated: 3 weeks)*
+This project implements several advanced concepts:
 
-**Deliverables:**
+### RAG (Retrieval-Augmented Generation)
+- Semantic search over technical documentation
+- Context-aware response generation
+- Dynamic knowledge updates
 
-1. Deployment scripts (Ansible, Helm, or Terraform).
-2. Staging environment deployment.
-3. Continuous learning feedback loop.
-4. Operational documentation and training.
+### Autonomous Task Planning
+- LLM-powered request decomposition
+- Dependency graph resolution
+- Execution plan optimization
 
-**Milestones:**
+### Continuous Learning
+- Performance metrics collection
+- Pattern recognition and optimization
+- Self-improving execution strategies
 
-* Week 1: Deployment automation.
-* Week 2: Performance optimization.
-* Week 3: Documentation and handover.
+##  Metrics & Analytics
 
----
+The agent tracks comprehensive performance metrics:
+- Execution success rates
+- Task completion times
+- Error patterns and resolutions
+- Usage analytics and optimization opportunities
 
-## **Security and Compliance Considerations**
+##  Development
 
-* **Authentication & Authorization** – integrate with Keystone for secure access.
-* **Audit Trails** – immutable logs for compliance.
-* **Role-Based Access Control (RBAC)** – restrict destructive actions to authorized users.
-* **Data Privacy** – ensure log data is sanitized before AI processing.
+### Running Tests
+```bash
+# Simulation mode for safe testing
+SIMULATE=1 python openstack_agent.py
 
----
+# Run specific component tests
+python -m pytest tests/
+```
 
-## **Future Enhancements**
+### Contributing
+1. Fork the repository
+2. Create a feature branch
+3. Implement changes with tests
+4. Submit a pull request
 
-* **Self-Healing Mode** – automatically apply corrective actions without human intervention.
-* **Cost Optimization AI** – analyze VM usage patterns to reduce expenses.
-* **Multi-Cloud Support** – extend compatibility beyond OpenStack.
+### Code Quality
+- Type hints throughout the codebase
+- Comprehensive error handling
+- Detailed logging and monitoring
+- Rich console interface for better UX
 
----
+## Future Roadmap
+
+- [ ] Web UI dashboard
+- [ ] Advanced security scanning
+- [ ] Cost optimization recommendations
+- [ ] Integration with monitoring tools (Prometheus, Grafana)
+- [ ] Workflow scheduling and orchestration
+- [ ] API REST for external integrations
+
+##  Documentation
+
+- [API Documentation](docs/api.md)
+- [Architecture Guide](docs/architecture.md)
+- [Deployment Guide](docs/deployment.md)
+- [Troubleshooting](docs/troubleshooting.md)
+
+##  Acknowledgments
+
+Developed during my engineering internship at a cloud startup as part of advanced R&D in AIOps. Special thanks to the DevOps team for their guidance and the opportunity to work on cutting-edge cloud automation technology.
+
+##  License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
